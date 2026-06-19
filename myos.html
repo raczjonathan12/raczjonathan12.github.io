@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="module" src="./script.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+  <body style="background-image:url(./4805401-4716538-the_avengers_ironman_by_stephencanlas-d4zpaxl.png);background-size:cover; font-family:Helvetica, Noto Sans, sans-serif ;">
+    <div class="window" id="welcome" style="top:50%; left:50%">
+        
+        <div class="windowheader">
+            <p id="welcomeheader" style="margin: 0; font-weight: bold;">Handle</p> 
+            <div class="closebutton" id="welcomeclose" onmousedown="closeWindow(event)">Close</p> </div>
+        </div>
+        <h2>About Me:</h2>
+        <p>Hello! My name is Jonathan,<br>I love to learn new things and use my skills to build cool things!<br>When I first heard about Hackclub I thought:<strong>Wow! finally something for me.</strong></p>
+        <p>This is my first time coding in html.</p>
+        <p>I <strong>love</strong> marvel especially Ironman, there is something about him that is just so cool!</p>
+        <img style="width: 128px; height: inherit; display:flexbox;gap:20px; "src="https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/tony_stark.png">
+        </div>
+
+    <div id="top" style="display:flex; justify-content: space-between;
+    position:absolute; width:100%; backdrop-filter: blur(10px); background-color: rgba(255,215,0,0.75); color:#fff; margin: 0; height:fit-content; border-radius: 16px;">
+        <p style="margin-left: 16px; font-weight: 700; font-family: sans-serif;cursor:pointer;" id="welcomeopen">IronManOS</p>
+        <p id="timeElement" style="margin-right: 16px;">Time</p>
+
+
+    </div>
+
+    <div id="desktopApps" class="desktopApps">
+        <div class="app" onclick="handleIconTap(this)">
+            <img src="https://m.media-amazon.com/images/I/81Y8fJUpbWL.jpg" class="app logo">
+            <p class="app name">Questions</p>
+        </div>
+
+    </div>
+
+    <div class="window" id="questions" style="display: none;">
+        <div class="windowheader" id="questionsheader">
+            <div class="closebutton" id="questionsclose">
+
+            </div>
+
+            <p class="headertext">Questions</p>
+            <div style="width: 16px; margin-right: 6px; height: 16px;"></div>
+
+        </div>
+        <div style="background-color: #fff; margin: 6px; border-radius: 12px; width: 520px; height: 480px; padding: 16px;">
+            <p>Questions</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

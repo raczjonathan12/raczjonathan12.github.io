@@ -1,0 +1,61 @@
+.closebutton {
+    background-color: red;
+    width:50px;
+    height: 50px; 
+    border-radius: 50%; 
+    position:relative;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.window {
+    list-style-type: square; 
+    padding: 6px; 
+    border: 2px ridge red; 
+    margin: 4px; 
+    border-radius: 16px; 
+    position:absolute; 
+    transform:translate(-50%,-50%);
+    top: calc(50% - 240px);
+    left: calc(50% - 260px);
+    background-color: gold; 
+    flex-direction: column; 
+    width:400px
+}
+
+.windowheader{
+    user-select: none; 
+    cursor: grab; 
+    align-items: center; 
+    width: 100%; 
+    display: flex; 
+    justify-content: space-between; 
+    position: relative; 
+    margin-bottom: 12px;
+}
+
+.desktopApps{
+    padding-top: 64px;
+    padding-left: 16px;
+}
+
+.app{
+    text-align: center;
+    padding: 16px;
+    filter: drop-shadow(0 0 8px red);
+    width: fit-content;
+    cursor: pointer;
+}
+
+.app .logo{
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+}
+
+.app .name{
+    margin: 0px;
+    margin-top: -10px;
+    color:#fff;
+}
