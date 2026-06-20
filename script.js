@@ -82,9 +82,10 @@ function selectIcon(element) {
 } 
 
 function deselectIcon(element) {
-    element.classList.remove("selected")
-    selectedIcon = undefined
-
+    if (element) {
+        element.classList.remove("selected")
+        selectedIcon = undefined
+    }
 }
 
 function handleIconTap(element) {
@@ -118,6 +119,12 @@ function openWindow(element) {
   biggestIndex++;  // Increment biggestIndex by 1
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
+  var startScreen = element.querySelector(".startScreen");
+  if (startScreen) {
+    startScreen.style.display = "flex";
+    var quizContainer = element.querySelector("#quizContainer");
+    if (quizContainer) quizContainer.style.display = "none";
+  }
 }
 
 function initializeWindow(elementName){
@@ -126,3 +133,194 @@ function initializeWindow(elementName){
     dragElement(screen)
 }
 initializeWindow("questions")
+
+function clearStartingScreen(element) {
+    element.style.display="none";
+}
+function showStartingScreen(element){
+    element.style.display="flex"
+}
+
+var quizQuestions =[
+    {
+        question: "Who's the real brains of the Avengers?",
+        optionA: "Tony Stark",
+        optionB: "Bruce Banner",
+        correct: "A",
+        image: "",
+        positiveComment: "Correct. Tony would just nod once, that's the highest praise he gives.",
+        negativeComment: "Wrong. Banner's good with gamma rays, not boardrooms."
+    },
+    {
+        question: "Which is the better tech?",
+        optionA: "Captain America's Shield",
+        optionB: "Iron Man's Suit",
+        correct: "B",
+        image: "",
+        positiveComment: "Right. A shield just blocks. A suit flies, fires, and talks back.",
+        negativeComment: "Wrong. Vibranium shields aren't everything."
+    },
+    {
+        question: "Who actually built the Avengers Tower?",
+        optionA: "Nick Fury",
+        optionB: "Tony Stark",
+        correct: "B",
+        image: "",
+        positiveComment: "Correct. Fury just signs forms, Stark signs the checks.",
+        negativeComment: "Wrong. Fury couldn't build a birdhouse, let alone a tower."
+    },
+    {
+        question: "Which is the better team?",
+        optionA: "Team Iron Man",
+        optionB: "Team Captain America",
+        correct: "A",
+        image: "",
+        positiveComment: "Correct. Civil War proved who actually plans ahead.",
+        negativeComment: "Wrong. Team Cap ran on nostalgia, not strategy."
+    },
+    {
+        question: "Who has the better one-liners?",
+        optionA: "Steve Rogers",
+        optionB: "Tony Stark",
+        correct: "B",
+        image: "",
+        positiveComment: "Right. Steve's best line is still just 'language.'",
+        negativeComment: "Wrong. Try sitting through a Stark roast first."
+    },
+    {
+        question: "Whose AI is more advanced?",
+        optionA: "Ultron",
+        optionB: "JARVIS",
+        correct: "B",
+        image: "",
+        positiveComment: "Correct. JARVIS never tried to end the human race.",
+        negativeComment: "Wrong. Ultron's a great AI if your goal is extinction."
+    },
+    {
+        question: "Who funded most of the Avengers' equipment?",
+        optionA: "Tony Stark",
+        optionB: "S.H.I.E.L.D.",
+        correct: "A",
+        image: "",
+        positiveComment: "Correct. S.H.I.E.L.D. mostly funds paperwork and cover-ups.",
+        negativeComment: "Wrong. Without Stark money, the helicarrier stays grounded."
+    },
+    {
+        question: "Which suit upgrade is more impressive?",
+        optionA: "Vibranium Shield Throw",
+        optionB: "Mark 85 Armor",
+        correct: "B",
+        image: "",
+        positiveComment: "Correct. One throw and the shield's done for the scene.",
+        negativeComment: "Wrong. A shield throw is just physics, not engineering."
+    },
+    {
+        question: "Who's the better strategist under pressure?",
+        optionA: "Tony Stark",
+        optionB: "Steve Rogers",
+        correct: "A",
+        image: "",
+        positiveComment: "Right. Stark builds the plan B while Steve's still finishing plan A.",
+        negativeComment: "Wrong. Steve's plans mostly involve punching first, thinking later."
+    },
+    {
+        question: "Which origin story took more guts?",
+        optionA: "Captain America",
+        optionB: "Iron Man",
+        correct: "B",
+        image: "",
+        positiveComment: "Correct. Stark built it himself in a cave with scraps.",
+        negativeComment: "Wrong. Steve just laid on a table and let the serum do the work."
+    }
+];
+
+
+var currentQuestionIndex = 0;
+var score=0;
+
+function setQuestionsContent(index){
+    var question = document.querySelector("#question")
+    var optionA = document.querySelector("#optionA p")
+    var optionB = document.querySelector("#optionB p")
+    var image=document.querySelector("#image")
+    question.innerHTML = quizQuestions[index].question
+    optionA.innerHTML = quizQuestions[index].optionA
+    optionB.innerHTML=quizQuestions[index].optionB
+    image.src=quizQuestions[index].image
+
+};
+
+setQuestionsContent(0)
+
+    function verifyAnswer(answer) {
+        var currentQuestion = quizQuestions[currentQuestionIndex];
+        if (answer === currentQuestion.correct) {
+            score += 1;
+            displayPositiveComment(currentQuestionIndex)
+        } else {
+            displayNegativeComment(currentQuestionIndex)
+        }
+    
+}
+
+
+
+function displayPositiveComment(index) {
+    var quizContainer = document.querySelector("#quizContainer");
+    var comment=quizQuestions[index].positiveComment
+    quizContainer.innerHTML = `
+        <h3 style="text-align: center; font-family: Arial, sans-serif; margin-top: 30px; color: green;">Nice Job!</h3>
+        <p style="text-align: center; font-family: Arial, sans-serif; font-size: 16px; padding: 0 10px;">${comment}</p>
+        <div class="options" style="margin-top: auto; margin-left: auto; margin-right: auto;" onmousedown="advanceQuiz(event)">
+            <p>Next</p>
+        </div>
+    `;
+}
+
+function displayNegativeComment(index){
+    var quizContainer = document.querySelector("#quizContainer");
+    var comment=quizQuestions[index].negativeComment
+    quizContainer.innerHTML = `
+        <h3 style="text-align: center; font-family: Arial, sans-serif; margin-top: 30px; color: red;">Not Quite...</h3>
+        <p style="text-align: center; font-family: Arial, sans-serif; font-size: 16px; padding: 0 10px;">${comment}</p>
+        <div class="options" style="margin-top: auto; margin-left: auto; margin-right: auto;" onmousedown="advanceQuiz(event)">
+            <p>Next</p>
+        </div>
+    `;
+}
+
+function advanceQuiz(event){
+    if (event) event.stopPropagation();
+    currentQuestionIndex +=1;
+
+    if (currentQuestionIndex<quizQuestions.length) {
+        resetQuizContainerHTML();
+        setQuestionsContent(currentQuestionIndex);
+    } else {
+        showFinalScore();
+    }
+}
+
+function resetQuizContainerHTML() {
+    var quizContainer = document.querySelector("#quizContainer");
+    quizContainer.innerHTML = `
+        <h3 id="question" style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-top: 8px; margin-bottom: 5px;"></h3>
+        <img id="image" src="" style="height: auto; max-height: 180px; width: auto; max-width: 280px; display: block; margin: 0 auto; object-fit: contain;">
+        <div class="options" id="optionA" onmousedown="verifyAnswer('A')">
+            <p></p>
+        </div>
+        <div class="options" id="optionB" onmousedown="verifyAnswer('B')">
+            <p></p>
+        </div>
+    `;
+}
+
+function showFinalScore() {
+    var quizContainer = document.querySelector("#quizContainer");
+    quizContainer.innerHTML = `
+        <h3 style="text-align: center; font-family: Arial, sans-serif; margin-top: 40px;">Game Over!</h3>
+        <p style="text-align: center; font-family: Arial, sans-serif; font-size: 18px;">
+            Your final score is: <strong>${score}</strong> out of ${quizQuestions.length}
+        </p>
+    `;
+}

@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="module" src="./script.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
-  <body style="background-image:url(./4805401-4716538-the_avengers_ironman_by_stephencanlas-d4zpaxl.png);background-size:cover; font-family:Helvetica, Noto Sans, sans-serif ;">
+  <body style="background-image:url(./images/4805401-4716538-the_avengers_ironman_by_stephencanlas-d4zpaxl.png);background-size:cover; font-family:Helvetica, Noto Sans, sans-serif ;">
     <div class="window" id="welcome" style="top:50%; left:50%">
         
         <div class="windowheader">
             <p id="welcomeheader" style="margin: 0; font-weight: bold;">Handle</p> 
-            <div class="closebutton" id="welcomeclose" onmousedown="closeWindow(event)">Close</p> </div>
+            <div class="closebutton" id="welcomeclose">Close</div>
         </div>
         <h2>About Me:</h2>
         <p>Hello! My name is Jonathan,<br>I love to learn new things and use my skills to build cool things!<br>When I first heard about Hackclub I thought:<strong>Wow! finally something for me.</strong></p>
         <p>This is my first time coding in html.</p>
         <p>I <strong>love</strong> marvel especially Ironman, there is something about him that is just so cool!</p>
-        <img style="width: 128px; height: inherit; display:flexbox;gap:20px; "src="https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/tony_stark.png">
+        <img style="width: 128px; height: inherit; display:flex;" src=".\images\tony_stark.png">
         </div>
 
     <div id="top" style="display:flex; justify-content: space-between;
@@ -28,7 +27,7 @@
 
     <div id="desktopApps" class="desktopApps">
         <div class="app" onclick="handleIconTap(this)">
-            <img src="https://m.media-amazon.com/images/I/81Y8fJUpbWL.jpg" class="app logo">
+            <img src="./images/81Y8fJUpbWL.jpg" class="app logo">
             <p class="app name">Questions</p>
         </div>
 
@@ -37,16 +36,34 @@
     <div class="window" id="questions" style="display: none;">
         <div class="windowheader" id="questionsheader">
             <div class="closebutton" id="questionsclose">
-
+                <p>Close</p>
             </div>
 
-            <p class="headertext">Questions</p>
-            <div style="width: 16px; margin-right: 6px; height: 16px;"></div>
+            <h3 class="headertext">Questions</h3>
+            <div style="width: 50px; margin-right: 6px; height: 50px;"></div>
 
         </div>
-        <div style="background-color: #fff; margin: 6px; border-radius: 12px; width: 520px; height: 480px; padding: 16px;">
-            <p>Questions</p>
+        <div style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
+            <div id="questionsStartScreen" class="startScreen">
+                <p style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Questions app!<br>Here we will figure out who is your favorite super hero,<br><strong>MAKE SURE YOU CHOOSE RIGHT!</strong></p>
+                <img src="./images/Robert_Downey_Jr._as_Tony_Stark_in_Avengers_Infinity_War.jpg" style="display: flex; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px;">
+                <div style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#questionsStartScreen')); document.querySelector('#quizContainer').style.display='flex';">
+                    <h3 style="display: flex;text-align: center; justify-content: center;position: relative; margin: 10px;">Continue</h3>
+                </div>
+            </div>
+            <div id="quizContainer" style="display: none; flex-direction: column;">
+                <h3 id="question" style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-top: 8px;margin-bottom: -8px;"></h3>
+                <img id="image" src="">
+                <div class="options" id="optionA" onmousedown="verifyAnswer('A', event)">
+                    <p></p>
+                </div>
+                <div class="options" id="optionB" onmousedown="verifyAnswer('B, event')">
+                    <p></p>
+                </div>
+            
+            </div>
         </div>
+        
     </div>
 
     <script src="script.js"></script>
