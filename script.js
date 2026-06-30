@@ -91,7 +91,8 @@ function deselectIcon(element) {
 function handleIconTap(element) {
     if (element.classList.contains("selected")) {
         deselectIcon(element)
-        openWindow(questionsScreen)
+        var windowId = element.dataset.window;
+        openWindow(document.querySelector("#" + windowId));
     } else {
         selectIcon(element)
     }
@@ -99,6 +100,9 @@ function handleIconTap(element) {
 var questionsScreen = document.querySelector("#questions");
 var questionsScreenClose = document.querySelector("#questionsclose");
 questionsScreenClose.addEventListener("click", ()=> closeWindow(questionsScreen));
+var jarvisScreen = document.querySelector("#jarvis");
+var jarvisScreenClose = document.querySelector("#jarvisclose");
+jarvisScreenClose.addEventListener("click", ()=> closeWindow(jarvisScreen));
 var biggestIndex =1;
 
 function addWindowTapHandling(element) {
@@ -124,6 +128,8 @@ function openWindow(element) {
     startScreen.style.display = "flex";
     var quizContainer = element.querySelector("#quizContainer");
     if (quizContainer) quizContainer.style.display = "none";
+    var jarvisContainer = element.querySelector("#jarvisContainer");
+    if (jarvisContainer) jarvisContainer.style.display = "none";
   }
 }
 
@@ -133,6 +139,7 @@ function initializeWindow(elementName){
     dragElement(screen)
 }
 initializeWindow("questions")
+initializeWindow("jarvis")
 
 function clearStartingScreen(element) {
     element.style.display="none";
@@ -323,4 +330,23 @@ function showFinalScore() {
             Your final score is: <strong>${score}</strong> out of ${quizQuestions.length}
         </p>
     `;
+}
+
+function startJarvisRecording() {
+    const audio = new Audio("./audio/JarvisRecording.mp3")
+    setInterval(100)
+    audio.play().catch(error => {console.log("Jarvis Failed", error)
+
+    });
+    
+}
+
+function startJarvisVideo(){
+    const video = document.getElementById("jarvisVideo");
+
+    video.muted =false;
+    video.play();
+    video.addEventListener('ended', () => {
+        closeWindow(jarvisScreen)
+    })
 }
