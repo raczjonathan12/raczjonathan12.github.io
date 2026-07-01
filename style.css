@@ -134,6 +134,39 @@ html, body {
     object-fit: contain;
 }
 
+.window:fullscreen .startScreen p,
+.window:fullscreen .startScreen h3,
+.window:fullscreen .startScreen h2 {
+    font-size: 2.2vw;
+}
+
+.window:fullscreen .startScreenImg {
+    width: 28vw !important;
+    height: auto !important;
+}
+
+.window:fullscreen .continueButton {
+    width: 18vw !important;
+    border-radius: 2vw !important;
+}
+
+.window:fullscreen .continueButton h3 {
+    font-size: 2vw;
+}
+
+.window:fullscreen #question {
+    font-size: 2.8vw;
+}
+
+.window:fullscreen .options {
+    max-width: 50vw;
+    padding: 1vw 0;
+}
+
+.window:fullscreen .options p {
+    font-size: 2vw;
+}
+
 .headerleft {
     display: flex;
     align-items: center;

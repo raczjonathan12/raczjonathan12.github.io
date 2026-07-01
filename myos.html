@@ -55,8 +55,8 @@
         <div id="questionsbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
             <div id="questionsStartScreen" class="startScreen">
                 <p style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Questions app!<br>Here we will figure out who is your favorite super hero,<br><strong>MAKE SURE YOU CHOOSE RIGHT!</strong></p>
-                <img src="./images/Robert_Downey_Jr._as_Tony_Stark_in_Avengers_Infinity_War.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px;">
-                <div style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#questionsStartScreen')); document.querySelector('#quizContainer').style.display='flex';">
+                <img class="startScreenImg" src="./images/Robert_Downey_Jr._as_Tony_Stark_in_Avengers_Infinity_War.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px;">
+                <div class="continueButton" style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#questionsStartScreen')); document.querySelector('#quizContainer').style.display='flex';">
                     <h3 style="display: flex;text-align: center; justify-content: center;position: relative; margin: 10px;">Continue</h3>
                 </div>
             </div>
@@ -89,8 +89,8 @@
         <div id="jarvisbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
             <div id="jarvisStartScreen" class="startScreen">
                 <h3 style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Jarvis app!</h3>
-                <img src="./images/3c486c80-729e-11ea-8279-5f9e57b8e2d9.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px; margin-top: 20px;">
-                <div style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#jarvisStartScreen')); document.querySelector('#jarvisContainer').style.display='flex'; 
+                <img class="startScreenImg" src="./images/3c486c80-729e-11ea-8279-5f9e57b8e2d9.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px; margin-top: 20px;">
+                <div class="continueButton" style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#jarvisStartScreen')); document.querySelector('#jarvisContainer').style.display='flex';
                     startJarvisVideo()">
                     <h3 style="display: flex;text-align: center; justify-content: center;position: relative; margin: 10px;">Continue</h3>
                 </div>
@@ -107,7 +107,7 @@
             <div class="closebutton" id="hudclose" onmousedown="event.stopPropagation()">
                 <p>Close</p>
             </div>
-            <h3 class="headertext">HUD</h3>
+            <h3 class="headertext">Suit HUD</h3>
             
 
         </div>

@@ -67,7 +67,7 @@ function closeWindow(element, event) {
 
      if (element.id === "hud") {
         document.querySelector("#suitDiag").classList.add("hud-hidden");
-        document.querySelector("#arcReactor").classList.add("hud-hidden");
+        document.querySelector("#centerPanel").classList.add("hud-hidden");
         document.querySelector("#environment").classList.add("hud-hidden");
     }
 }
