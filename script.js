@@ -57,11 +57,20 @@ function dragElement(element) {
 
 var welcomeScreen = document.querySelector("#welcome")
 function closeWindow(element, event) {
-    element.style.display = "none"
+    element.style.display = "none";
+    document.onmousemove = null;
+    document.onmouseup = null;
+    element.classList.remove("maximized");
+    topBar.style.display = "flex";
+    if (document.fullscreenElement) document.exitFullscreen();
     if (event) event.stopPropagation();
+
+     if (element.id === "hud") {
+        document.querySelector("#suitDiag").classList.add("hud-hidden");
+        document.querySelector("#arcReactor").classList.add("hud-hidden");
+        document.querySelector("#environment").classList.add("hud-hidden");
+    }
 }
-
-
 
 var welcomeScreenClose = document.querySelector("#welcomeclose")
 
@@ -93,17 +102,44 @@ function handleIconTap(element) {
         deselectIcon(element)
         var windowId = element.dataset.window;
         openWindow(document.querySelector("#" + windowId));
+        if (windowId === "hud") {
+            updateHud();
+            bootSequence();
+        }
     } else {
         selectIcon(element)
     }
 }
-var questionsScreen = document.querySelector("#questions");
-var questionsScreenClose = document.querySelector("#questionsclose");
-questionsScreenClose.addEventListener("click", ()=> closeWindow(questionsScreen));
-var jarvisScreen = document.querySelector("#jarvis");
-var jarvisScreenClose = document.querySelector("#jarvisclose");
-jarvisScreenClose.addEventListener("click", ()=> closeWindow(jarvisScreen));
-var biggestIndex =1;
+
+var biggestIndex = 1;
+
+function makeClosable(element) {
+    const screen = document.querySelector("#"+element)
+    const screenClose = document.querySelector("#"+element+"close")
+    screenClose.addEventListener("click", () => closeWindow(screen))
+}
+
+function makeFullScreen(element) {
+    const screen = document.querySelector("#"+element);
+    const screenFull = document.querySelector("#"+element+"full");
+
+    if (!screen || !screenFull) return;
+
+    screenFull.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+            screen.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    });
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+});
+
 
 function addWindowTapHandling(element) {
     element.addEventListener("mousedown", ()=>handleWindowTap(element))
@@ -120,9 +156,13 @@ function handleWindowTap(element){
 
 function openWindow(element) {
   element.style.display = "flex";
-  biggestIndex++;  // Increment biggestIndex by 1
+  biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
+  if (element.id === "hud") {
+    element.classList.add("maximized");
+    topBar.style.display = "none";
+  }
   var startScreen = element.querySelector(".startScreen");
   if (startScreen) {
     startScreen.style.display = "flex";
@@ -133,14 +173,18 @@ function openWindow(element) {
   }
 }
 
+
+
 function initializeWindow(elementName){
     var screen = document.querySelector("#"+elementName)
     addWindowTapHandling(screen)
     dragElement(screen)
+    makeClosable(elementName)
+    makeFullScreen(elementName)
 }
 initializeWindow("questions")
 initializeWindow("jarvis")
-
+initializeWindow("hud")
 function clearStartingScreen(element) {
     element.style.display="none";
 }
@@ -349,4 +393,80 @@ function startJarvisVideo(){
     video.addEventListener('ended', () => {
         closeWindow(jarvisScreen)
     })
+}
+
+function randomPercent(barElement, valueElement) {
+    const percent = Math.floor(Math.random() * 101);
+    const fillElement = barElement.firstElementChild;
+    fillElement.style.width = percent + "%";
+    valueElement.textContent = percent + "%";
+
+    if (percent <= 60) {
+        fillElement.style.backgroundColor = "#ff6b00";
+    } else {
+        fillElement.style.backgroundColor = "#00d4ff";
+    }
+
+    return percent;
+}
+
+function updateHud() {
+    const arcPercent = randomPercent(
+        document.querySelector("#arc-reactor-bar"),
+        document.querySelector("#arc-reactor-value")
+    );
+
+    document.querySelector("#arc-core-value").textContent = arcPercent + "%";
+    document.querySelector("#battery").textContent = arcPercent + "%";
+
+    randomPercent(
+        document.querySelector("#left-repulsor-bar"),
+        document.querySelector("#left-repulsor-value")
+    );
+    randomPercent(
+        document.querySelector("#right-repulsor-bar"),
+        document.querySelector("#right-repulsor-value")
+    );
+    randomPercent(
+        document.querySelector("#flight-system-bar"),
+        document.querySelector("#flight-system-value")
+    );
+    randomPercent(
+        document.querySelector("#structural-integrity-bar"),
+        document.querySelector("#structural-integrity-value")
+    );
+
+    randomEnv();
+}
+
+function randomEnv() {
+    const altitude = Math.floor(Math.random() * 5000) + 500;
+    document.querySelector("#altitude-value").textContent = altitude.toLocaleString() + " M";
+
+    const speed = Math.floor(Math.random() * 900) + 100;
+    document.querySelector("#speed-value").textContent = speed + " KMH";
+
+    const temperature = Math.floor(Math.random() * 60) - 30;
+    document.querySelector("#temperature-value").textContent = temperature + "°C";
+
+    const threatLevels = ["LOW", "MODERATE", "HIGH", "CRITICAL"];
+    const threat = threatLevels[Math.floor(Math.random() * threatLevels.length)];
+    document.querySelector("#threat-value").textContent = threat;
+
+    const targets = Math.floor(Math.random() * 5);
+    document.querySelector("#targets-value").textContent = targets + " LOCKED";
+}
+
+function bootSequence() {
+    setTimeout(function() {
+        document.querySelector("#suitDiag").classList.remove("hud-hidden")
+    }, 300);
+
+    setTimeout(function() {
+        document.querySelector("#centerPanel").classList.remove("hud-hidden")
+    }, 600);
+
+    setTimeout(function() {
+        document.querySelector("#environment").classList.remove("hud-hidden")
+    }, 900);
 }

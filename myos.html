@@ -34,20 +34,25 @@
             <img src="./images/3c486c80-729e-11ea-8279-5f9e57b8e2d9.jpg" class="app logo">
             <p class="app name">Jarvis AI</p>
         </div>
+        <div class="app" onclick="handleIconTap(this)" data-window="hud">
+            <img src="./images/arc_reactor.png" class="app logo">
+            <p class="app name">Suit HUD</p>
+        </div>
 
     </div>
 
     <div class="window" id="questions" style="display: none;">
         <div class="windowheader" id="questionsheader">
-            <div class="closebutton" id="questionsclose">
+            <div class="closebutton" id="questionsclose" onmousedown="event.stopPropagation()">
                 <p>Close</p>
             </div>
-
             <h3 class="headertext">Questions</h3>
-            <div style="width: 50px; margin-right: 6px; height: 50px;"></div>
+            <div class="fullscreenbutton" id="questionsfull" onmousedown="event.stopPropagation()">
+                <p>FullScreen</p>
+            </div>
 
         </div>
-        <div style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
+        <div id="questionsbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
             <div id="questionsStartScreen" class="startScreen">
                 <p style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Questions app!<br>Here we will figure out who is your favorite super hero,<br><strong>MAKE SURE YOU CHOOSE RIGHT!</strong></p>
                 <img src="./images/Robert_Downey_Jr._as_Tony_Stark_in_Avengers_Infinity_War.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px;">
@@ -72,14 +77,16 @@
 
     <div class="window" id="jarvis" style="display: none;">
         <div class="windowheader" id="jarvisheader">
-            <div class="closebutton" id="jarvisclose">
+            <div class="closebutton" id="jarvisclose" onmousedown="event.stopPropagation()">
                 <p>Close</p>
             </div>
             <h3 class="headertext">Jarvis</h3>
-            <div style="width: 50px; margin-right: 6px; height: 50px;"></div>
+            <div class="fullscreenbutton" id="jarvisfull" onmousedown="event.stopPropagation()">
+                <p>FullScreen</p>
+            </div>
 
         </div>
-        <div style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
+        <div id="jarvisbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
             <div id="jarvisStartScreen" class="startScreen">
                 <h3 style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Jarvis app!</h3>
                 <img src="./images/3c486c80-729e-11ea-8279-5f9e57b8e2d9.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px; margin-top: 20px;">
@@ -92,6 +99,118 @@
                 <video id="jarvisVideo" style="width:100%; border-radius: 8px;">
                     <source src="videos/Animate_the_uploaded_JARVI (1).mp4" type="video/mp4">
                 </video>
+            </div>
+        </div>
+    </div>
+    <div class="window" id="hud" style="display: none;">
+        <div class="windowheader" id="hudheader">
+            <div class="closebutton" id="hudclose" onmousedown="event.stopPropagation()">
+                <p>Close</p>
+            </div>
+            <h3 class="headertext">HUD</h3>
+            
+
+        </div>
+        <div id="hudbackground" style="background-color: #050a0f; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center; position: relative; overflow: hidden;">
+            <div id="hudContainer">
+                <div class="hud-corner corner-tl"></div>
+                <div class="hud-corner corner-tr"></div>
+                <div class="hud-corner corner-bl"></div>
+                <div class="hud-corner corner-br"></div>
+                <div id="scan-line"></div>
+                <div id="suitDiag" class="hud-hidden">
+                    <p class="title">Suit diagnostics</p>
+                    <div class="DiagInfo">
+                        <p class="stat-name">ARC REACTOR</p>
+                        <div class="bar" id="arc-reactor-bar" style="background: #00d4ff11; height: 6px;">
+                            <div style="background: #00d4ff; width: 88%; height: 6px;"></div>
+                        </div>
+                        <p class="stat-value" id="arc-reactor-value">88%</p>
+                    </div>
+                    <div class="DiagInfo">
+                        <p class="stat-name">LEFT REPULSOR</p>
+                        <div class="bar" id="left-repulsor-bar" style="background: #00d4ff11; height: 6px;">
+                            <div style="background: #00d4ff; width: 88%; height: 6px;"></div>
+                        </div>
+                        <p class="stat-value" id="left-repulsor-value">88%</p>
+                    </div>
+                    <div class="DiagInfo">
+                        <p class="stat-name">RIGHT REPULSOR</p>
+                        <div class="bar" id="right-repulsor-bar" style="background: #00d4ff11; height: 6px;">
+                            <div style="background: #00d4ff; width: 88%; height: 6px;"></div>
+                        </div>
+                        <p class="stat-value" id="right-repulsor-value">88%</p>
+                    </div>
+                    <div class="DiagInfo">
+                        <p class="stat-name">FLIGHT SYSTEM</p>
+                        <div class="bar" id="flight-system-bar" style="background: #00d4ff11; height: 6px;">
+                            <div style="background: #00d4ff; width: 67%; height: 6px;"></div>
+                        </div>
+                        <p class="stat-value" id="flight-system-value">88%</p>
+                    </div>
+                    <div class="DiagInfo">
+                        <p class="stat-name">STRUCTURAL INTEGRITY</p>
+                        <div class="bar" id="structural-integrity-bar" style="background: #00d4ff11; height: 6px;">
+                            <div style="background: #00d4ff; width: 88%; height: 6px;"></div>
+                        </div>
+                        <p class="stat-value"  id="structural-integrity-value">88%</p>
+                    </div>
+                    <div class="status">
+                        <div class="status-display"></div>
+                        <p class="status-name">JARVIS ONLINE</p>
+                    </div>
+                    <div class="status">
+                        <div class="status-display"></div>
+                        <p class="status-name">WEAPONS SAFE</p>
+                    </div>
+                    <div class="status">
+                        <div class="status-display" style="background-color: #ff6b00;"></div>
+                        <p class="status-name">HULL BREACH</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div id="centerPanel" class="hud-hidden">
+                    <div id="arcReactor">
+                        <div class="arc-ring arc-ring-1"></div>
+                        <div class="arc-ring arc-ring-2"></div>
+                        <div class="arc-ring arc-ring-3"></div>
+                        <div class="arc-core">
+                            <p class="arc-core-value" id="arc-core-value">97%</p>
+                        </div>
+                    </div>
+                    <p id="battery">97.4%</p>
+                </div>
+                <div class="divider"></div>
+                <div id="environment" class="hud-hidden">
+                    <p class="title">Environment</p>
+                    <div class="envInfo">
+                        <p class="envInfoName">ALTITUDE</p>
+                        <p class="envInfoValue" id="altitude-value">3,420 M</p>
+                    </div>
+                    <div class="envInfo">
+                        <p class="envInfoName">SPEED</p>
+                        <p class="envInfoValue" id="speed-value">812 KMH</p>
+                    </div>
+                    <div class="envInfo">
+                        <p class="envInfoName">TEMPERATURE</p>
+                        <p class="envInfoValue" id="temperature-value">-14°C</p>
+                    </div>
+                    <div class="envInfo">
+                        <p class="envInfoName">THREAT LEVEL</p>
+                        <p class="envInfoValue" id="threat-value">HIGH</p>
+                    </div>
+                    <div class="envInfo">
+                        <p class="envInfoName">TARGETS</p>
+                        <p class="envInfoValue" id="targets-value">3 LOCKED</p>
+                    </div>
+                    <div class="radar">
+                        <div class="radar-cross-v"></div>
+                        <div class="radar-cross-h"></div>
+                        <div class="radar-sweep"></div>
+                        <div class="radar-blip"></div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
