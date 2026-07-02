@@ -52,11 +52,11 @@
             </div>
 
         </div>
-        <div id="questionsbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
+        <div id="questionsbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 100%; max-width: 280px; height: 55vh; max-height: 340px;display: flex;flex-direction: column; padding: 10px;align-self: center; overflow-y: auto;">
             <div id="questionsStartScreen" class="startScreen">
                 <p style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Questions app!<br>Here we will figure out who is your favorite super hero,<br><strong>MAKE SURE YOU CHOOSE RIGHT!</strong></p>
-                <img class="startScreenImg" src="./images/Robert_Downey_Jr._as_Tony_Stark_in_Avengers_Infinity_War.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px;">
-                <div class="continueButton" style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#questionsStartScreen')); document.querySelector('#quizContainer').style.display='flex';">
+                <img class="startScreenImg" src="./images/Robert_Downey_Jr._as_Tony_Stark_in_Avengers_Infinity_War.jpg" style="display: block; align-self: center; justify-content: center; width:auto; max-width:200px; height: auto; max-height: 40%; padding-bottom: 10px;">
+                <div class="continueButton" style="display: flex;flex-direction: column; margin-top: auto;flex-shrink: 0;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#questionsStartScreen')); document.querySelector('#quizContainer').style.display='flex';">
                     <h3 style="display: flex;text-align: center; justify-content: center;position: relative; margin: 10px;">Continue</h3>
                 </div>
             </div>
@@ -86,11 +86,11 @@
             </div>
 
         </div>
-        <div id="jarvisbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center;">
+        <div id="jarvisbackground" style="background-color: #fff; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 100%; max-width: 280px; height: 55vh; max-height: 340px;display: flex;flex-direction: column; padding: 10px;align-self: center; overflow-y: auto;">
             <div id="jarvisStartScreen" class="startScreen">
                 <h3 style="font-family: Arial, Helvetica, sans-serif; margin-top: 3px;">Welcome to the Jarvis app!</h3>
-                <img class="startScreenImg" src="./images/3c486c80-729e-11ea-8279-5f9e57b8e2d9.jpg" style="display: block; align-self: center; justify-content: center; width:200px; height: auto; padding-bottom: 10px; margin-top: 20px;">
-                <div class="continueButton" style="display: flex;flex-direction: column; margin-top: auto;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#jarvisStartScreen')); document.querySelector('#jarvisContainer').style.display='flex';
+                <img class="startScreenImg" src="./images/3c486c80-729e-11ea-8279-5f9e57b8e2d9.jpg" style="display: block; align-self: center; justify-content: center; width:auto; max-width:200px; height: auto; max-height: 40%; padding-bottom: 10px; margin-top: 20px;">
+                <div class="continueButton" style="display: flex;flex-direction: column; margin-top: auto;flex-shrink: 0;justify-content: center;margin-bottom: 10px; background-color: bisque; width: 150px; border-radius: 20px; margin-left: auto; margin-right: auto;" onmousedown="clearStartingScreen(document.querySelector('#jarvisStartScreen')); document.querySelector('#jarvisContainer').style.display='flex';
                     startJarvisVideo()">
                     <h3 style="display: flex;text-align: center; justify-content: center;position: relative; margin: 10px;">Continue</h3>
                 </div>
@@ -111,7 +111,7 @@
             
 
         </div>
-        <div id="hudbackground" style="background-color: #050a0f; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 360px;height: 400px;display: flex;flex-direction: column; padding: 10px;align-self: center; position: relative; overflow: hidden;">
+        <div id="hudbackground" style="background-color: #050a0f; margin-left: 6px;margin-right: 6px;box-sizing: border-box; border-radius: 12px; width: 100%; max-width: 280px; height: 55vh; max-height: 340px;display: flex;flex-direction: column; padding: 10px;align-self: center; position: relative; overflow: hidden;">
             <div id="hudContainer">
                 <div class="hud-corner corner-tl"></div>
                 <div class="hud-corner corner-tr"></div>

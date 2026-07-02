@@ -46,6 +46,7 @@ function dragElement(element) {
     // Step 11: Update the element's new position by modifying its `top` and `left` CSS properties.
     element.style.top = (element.offsetTop - currentY) + "px";
     element.style.left = (element.offsetLeft - currentX) + "px";
+    clampWindowToTopbar(element);
   }
 
   // Step 12: Define the `stopDragging` function to stop tracking mouse movement by removing the event listeners.
@@ -147,6 +148,20 @@ function addWindowTapHandling(element) {
 
 var topBar = document.querySelector("#top")
 
+// Keep windows from spawning or being dragged behind/under the topbar.
+function clampWindowToTopbar(element) {
+    if (element.classList.contains("maximized") || document.fullscreenElement === element) return;
+    if (topBar.style.display === "none" || getComputedStyle(topBar).display === "none") return;
+
+    var topbarBottom = topBar.getBoundingClientRect().bottom;
+    var rect = element.getBoundingClientRect();
+
+    if (rect.top < topbarBottom) {
+        var diff = topbarBottom - rect.top;
+        element.style.top = (element.offsetTop + diff) + "px";
+    }
+}
+
 function handleWindowTap(element){
     biggestIndex++;
     element.style.zIndex=biggestIndex;
@@ -162,6 +177,8 @@ function openWindow(element) {
   if (element.id === "hud") {
     element.classList.add("maximized");
     topBar.style.display = "none";
+  } else {
+    clampWindowToTopbar(element);
   }
   var startScreen = element.querySelector(".startScreen");
   if (startScreen) {
@@ -185,6 +202,7 @@ function initializeWindow(elementName){
 initializeWindow("questions")
 initializeWindow("jarvis")
 initializeWindow("hud")
+clampWindowToTopbar(document.getElementById("welcome"));
 function clearStartingScreen(element) {
     element.style.display="none";
 }
@@ -389,9 +407,10 @@ function startJarvisVideo(){
     const video = document.getElementById("jarvisVideo");
 
     video.muted =false;
+    video.volume=0.5
     video.play();
     video.addEventListener('ended', () => {
-        closeWindow(jarvisScreen)
+        closeWindow(document.getElementById("jarvis"))
     })
 }
 

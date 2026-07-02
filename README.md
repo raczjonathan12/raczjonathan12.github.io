@@ -9,7 +9,7 @@
 - A desktop environment with draggable, closable windows
 - A quiz app to test how much you love Iron Man
 - A Jarvis AI app that plays a video response when triggered
-- An animated Suit HUD with live-updating power diagnostics, a spinning arc reactor, and simulated environmental readouts
+- An animated Suit HUD with updating power diagnostics, a spinning arc reactor, and simulated environmental readouts
 
 ## How it works
 The Suit HUD simulates a boot sequence using staggered `setTimeout` calls and CSS transitions, and randomizes its diagnostic values on every open to feel alive rather than static.
